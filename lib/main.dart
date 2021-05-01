@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_panel/pages/splash_page.dart';
+
+import 'package:hackathon_panel/pages/splash_page/view/splash_page_view.dart';
 
 void main() {
   runApp(
@@ -17,6 +18,6 @@ class HackathonPanel extends StatelessWidget {
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: const SplashPage(),
+        home: const SplashPageView(),
       );
 }

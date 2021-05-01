@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
+
+import 'package:hackathon_panel/core/util/constants.dart';
 import 'package:hackathon_panel/api/models/base_response.dart';
 import 'package:hackathon_panel/api/models/login_response.dart';
 import 'package:hackathon_panel/api/models/project_detail_response.dart';
 import 'package:hackathon_panel/api/models/project_list_response.dart';
-import 'package:hackathon_panel/util/constants.dart';
-import 'package:http/http.dart' as http;
 
 // ignore: avoid_classes_with_only_static_members
 class API {
