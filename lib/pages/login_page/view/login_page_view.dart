@@ -1,7 +1,11 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hackathon_panel/core/base/base_view.dart';
+import 'package:hackathon_panel/core/components/app_logo.dart';
+import 'package:hackathon_panel/core/components/base_button.dart';
+import 'package:hackathon_panel/core/extension/context_extension.dart';
+import 'package:hackathon_panel/pages/login_page/components/email_input_field.dart';
+import 'package:hackathon_panel/pages/login_page/components/password_input_field.dart';
 import 'package:hackathon_panel/pages/login_page/viewmodel/login_page_view_model.dart';
 
 class LoginPageView extends StatefulWidget {
@@ -24,33 +28,37 @@ class _LoginPageViewState extends State<LoginPageView> {
         },
         model: LoginPageViewModel(),
         builder: (context, value) => Scaffold(
-          appBar: AppBar(title: const Text('Giriş Yap')),
+          key: viewModel.scaffoldKey,
           body: Form(
-            key: viewModel.formKey,
-            child: Padding(
+            autovalidateMode: viewModel.isAutoValidate
+                ? AutovalidateMode.onUserInteraction
+                : AutovalidateMode.disabled,
+            key: viewModel.loginFormKey,
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(36),
-              child: Column(
-                children: [
-                  //email field
-                  TextFormField(
-                    controller: viewModel.emailController,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (email) => EmailValidator.validate(email!)
-                        ? null
-                        : 'Geçersiz email',
+              child: Center(
+                child: AutofillGroup(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Flutter Festivali Hackathon Paneline Hoş Geldiniz',
+                        style: context.textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                      const AppLogo(height: 250),
+                      const SizedBox(height: 50),
+                      EmailInputField(controller: viewModel.emailController),
+                      PasswordInputField(
+                        controller: viewModel.passwordController,
+                      ),
+                      const SizedBox(height: 30),
+                      BaseButton(
+                        label: 'Giriş Yap',
+                        onPressed: () async => viewModel.onPressedLoginButton(),
+                      ),
+                    ],
                   ),
-                  //password field
-                  TextFormField(
-                    controller: viewModel.passwordController,
-                    validator: (val) =>
-                        val!.isEmpty ? 'Şifre boş bırakılamaz' : null,
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () async => viewModel.onPressedLoginButton(),
-                    child: const Text('Giriş'),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
