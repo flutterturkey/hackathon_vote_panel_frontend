@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view.dart';
+import 'package:hackathon_panel/core/components/base_app_bar_title.dart';
 import 'package:hackathon_panel/core/components/loading_indicator.dart';
 import 'package:hackathon_panel/core/extension/context_extension.dart';
+import 'package:hackathon_panel/pages/home_page/components/project_card.dart';
+import 'package:hackathon_panel/pages/home_page/components/log_out_action_button.dart';
 import 'package:hackathon_panel/pages/home_page/viewmodel/home_page_view_model.dart';
-import 'package:hackathon_panel/widgets/project_card.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({Key? key}) : super(key: key);
@@ -30,35 +31,12 @@ class _HomePageViewState extends State<HomePageView> {
         builder: (context, value) => Scaffold(
           appBar: AppBar(
             backgroundColor: const Color(0xff424242),
-            title: Text(
-              "Hackathon'a Katılan Projeler",
-              style: context.textTheme.headline4!.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.orange[800],
-              ),
-              textAlign: TextAlign.center,
-            ),
+            centerTitle: true,
+            title: const AppBarTitle("Hackathon'a Katılan Projeler"),
             actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 8),
-                child: TextButton(
-                  onPressed: () async {
-                    await viewModel.logout();
-                  },
-                  child: Row(
-                    children: [
-                      Icon(MdiIcons.logout, color: Colors.orange[800]),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      const Text(
-                        'Çıkış Yap',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              )
+              LogOutActionButton(
+                onPressed: () async => viewModel.onPressedLogoutButton(),
+              ),
             ],
           ),
           body: FutureBuilder<ProjectListResponse>(
@@ -67,7 +45,7 @@ class _HomePageViewState extends State<HomePageView> {
               if (snapshot.hasData) {
                 return GridView.builder(
                   shrinkWrap: true,
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(12),
                   physics: const BouncingScrollPhysics(),
                   itemCount: snapshot.data!.data!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -78,7 +56,11 @@ class _HomePageViewState extends State<HomePageView> {
                   ),
                   itemBuilder: (context, index) {
                     final item = snapshot.data!.data![index];
-                    return ProjectCard(item);
+                    return ProjectCard(
+                      projectName: item.name!,
+                      projectTeam: item.teamName!,
+                      onPressedCard: () => viewModel.onPressedProjectCard(item),
+                    );
                   },
                 );
               } else {
