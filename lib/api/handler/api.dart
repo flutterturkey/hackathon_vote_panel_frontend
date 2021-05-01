@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hackathon_panel/api/models/base_response.dart';
 import 'package:hackathon_panel/api/models/login_response.dart';
 import 'package:hackathon_panel/api/models/project_detail_response.dart';
@@ -6,8 +7,9 @@ import 'package:hackathon_panel/util/constants.dart';
 import 'package:http/http.dart' as http;
 
 class API {
-  static final String apiUrl =
-      'administrative-cod-veterinary-madonna.trycloudflare.com';
+  static final String apiUrl = kDebugMode
+      ? 'administrative-cod-veterinary-madonna.trycloudflare.com'
+      : 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
     'Authorization': 'Bearer ${Constants.token}'
