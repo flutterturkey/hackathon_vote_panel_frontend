@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
           if (token.isEmpty) {
             return const LoginPage();
           } else {
-            return const HomePage();
+            return const HomePageView();
           }
         },
       ),

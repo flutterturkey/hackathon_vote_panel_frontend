@@ -62,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                             const SnackBar(content: Text('Giriş başarılı!')));
                         await Utils.instance.setToken(response.data!.token!);
                         await Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (_) => const HomePage()),
+                          MaterialPageRoute(
+                              builder: (_) => const HomePageView()),
                         );
                       }
                     }
