@@ -8,17 +8,15 @@ import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/util/constants.dart';
 import 'package:http/http.dart' as http;
 
+// ignore: avoid_classes_with_only_static_members
 class API {
-  static final String apiUrl = kDebugMode
-      ? 'verification-mint-country-motion.trycloudflare.com'
-      : 'hp-api.ademozcan.com.tr';
+  static const String apiUrl = 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
     'Authorization': 'Bearer ${AppConstants.instance.token}'
   };
 
   static Future<dynamic> get(String path) async {
-    print(handleUrl(path));
     final response = await http.get(handleUrl(path), headers: headers);
     return response.body;
   }
@@ -39,7 +37,6 @@ class API {
   static Uri handleUrl(String path) => Uri.https(apiUrl, 'api/$path');
 
   static Future<LoginResponse> login(String email, String password) async {
-    print(handleUrl('login'));
     final response = await http.post(
       handleUrl('login'),
       headers: headers,
@@ -49,28 +46,26 @@ class API {
       },
     );
 
-    final responseJson = json.decode(response.body);
-
-    return LoginResponse().fromJson(responseJson);
+    return LoginResponse().fromJson(json.decode(response.body));
   }
 
   static Future<ProjectListResponse> getProjects() async {
     final response = await get('projects');
-    return response;
+    return ProjectListResponse().fromJson(json.decode(response));
   }
 
   static Future<ProjectDetailResponse> getProjectDetail(int id) async {
     final response = await get('projects/$id');
-    return response;
+    return ProjectDetailResponse().fromJson(json.decode(response));
   }
 
   static Future<BaseResponse> upvoteProject(int id) async {
     final response = await post('projects/$id');
-    return response;
+    return BaseResponse().fromJson(json.decode(response));
   }
 
   static Future<BaseResponse> downvoteProject(int id) async {
     final response = await delete('projects/$id');
-    return response;
+    return BaseResponse().fromJson(json.decode(response));
   }
 }

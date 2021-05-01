@@ -27,7 +27,7 @@ class Project {
   String? github;
   String? video;
   int? vote;
-  dynamic images;
+  List<String>? images;
 
   Project fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
 

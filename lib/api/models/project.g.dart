@@ -16,7 +16,8 @@ Project _$ProjectFromJson(Map<String, dynamic> json) {
     github: json['github'] as String?,
     video: json['video'] as String?,
     vote: json['vote'] as int?,
-    images: json['images'],
+    images:
+        (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
 }
 

@@ -33,6 +33,14 @@ class _ProjectCardState extends State<ProjectCard> {
                 ),
               );
             },
+            child: Row(
+              children: [
+                Text(
+                  widget.project.name!,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
           ),
         ),
       );

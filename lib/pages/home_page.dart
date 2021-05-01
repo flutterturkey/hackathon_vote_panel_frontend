@@ -11,7 +11,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<ProjectListResponse> getProjects() async => API.getProjects();
+  Future<ProjectListResponse> getProjects() async {
+    final response = await API.getProjects();
+    response.data!.sort((a, b) => a.vote!.compareTo(b.vote!));
+    return response;
+  }
 
   @override
   Widget build(BuildContext context) {
