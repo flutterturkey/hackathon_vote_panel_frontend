@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:hackathon_panel/pages/home_page.dart';
 import 'package:hackathon_panel/pages/login_page.dart';
 import 'package:hackathon_panel/util/token.dart';
@@ -18,11 +19,17 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> checkToken() async {
-    final token = await Utils.getToken();
+    final token = await Utils.instance.getToken();
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-          builder: (_) =>
-              token.isEmpty || token != null ? LoginPage() : HomePage()),
+        builder: (_) {
+          if (token.isEmpty || token != null) {
+            return LoginPage();
+          } else {
+            return HomePage();
+          }
+        },
+      ),
     );
   }
 

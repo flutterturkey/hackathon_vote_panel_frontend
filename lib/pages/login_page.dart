@@ -54,14 +54,14 @@ class _LoginPageState extends State<LoginPage> {
                     final response = await API.login(
                         _emailController.text, _passwordController.text);
                     if (response.data.message != null) {
-                      ScaffoldMessenger.of(context).clearSnackBars();
+                      // ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(response.data.message)));
                     } else {
-                      ScaffoldMessenger.of(context).clearSnackBars();
+                      // ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Giriş başarılı!')));
-                      await Utils.setToken(response.data.token);
+                      await Utils.instance.setToken(response.data.token);
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (_) => HomePage()));
                     }

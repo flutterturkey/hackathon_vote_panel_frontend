@@ -12,7 +12,7 @@ class API {
       : 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
-    'Authorization': 'Bearer ${Constants.token}'
+    'Authorization': 'Bearer ${AppConstants.instance.token}'
   };
 
   static Future<dynamic> get(String path) async {
