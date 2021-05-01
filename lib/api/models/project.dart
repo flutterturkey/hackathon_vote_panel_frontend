@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'project.g.dart';
+
+@JsonSerializable()
 class Project {
   Project({
     this.id,
@@ -11,17 +16,8 @@ class Project {
     this.images,
   });
 
-  factory Project.fromJson(Map<String, dynamic> json) => Project(
-        id: json['id'],
-        name: json['name'],
-        desc: json['desc'],
-        teamName: json['team_name'],
-        liked: json['liked'],
-        github: json['github'],
-        video: json['video'],
-        vote: json['vote'],
-        images: json['images'],
-      );
+  factory Project.fromJson(Map<String, dynamic> json) =>
+      _$ProjectFromJson(json);
 
   int? id;
   String? name;
@@ -33,15 +29,7 @@ class Project {
   int? vote;
   dynamic images;
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'desc': desc,
-        'team_name': teamName,
-        'liked': liked,
-        'github': github,
-        'video': video,
-        'vote': vote,
-        'images': images,
-      };
+  Project fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProjectToJson(this);
 }

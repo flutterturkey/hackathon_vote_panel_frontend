@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:hackathon_panel/api/models/base_response.dart';
 import 'package:hackathon_panel/api/models/login_response.dart';
@@ -47,26 +49,28 @@ class API {
       },
     );
 
-    return loginResponseFromJson(response.body);
+    final responseJson = json.decode(response.body);
+
+    return LoginResponse().fromJson(responseJson);
   }
 
   static Future<ProjectListResponse> getProjects() async {
     final response = await get('projects');
-    return projectListResponseFromJson(response);
+    return response;
   }
 
   static Future<ProjectDetailResponse> getProjectDetail(int id) async {
     final response = await get('projects/$id');
-    return projectDetailResponseFromJson(response);
+    return response;
   }
 
   static Future<BaseResponse> upvoteProject(int id) async {
     final response = await post('projects/$id');
-    return baseResponseFromJson(response);
+    return response;
   }
 
   static Future<BaseResponse> downvoteProject(int id) async {
     final response = await delete('projects/$id');
-    return baseResponseFromJson(response);
+    return response;
   }
 }
