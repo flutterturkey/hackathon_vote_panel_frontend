@@ -88,7 +88,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                       ),
                       Text(
                         item.desc!,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.bodyText1,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(
@@ -117,7 +117,9 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                           viewportFraction: calculateViewportFraction(
                               MediaQuery.of(context).size.width),
                           initialPage: 0,
-                          enableInfiniteScroll: true,
+                          enableInfiniteScroll:
+                              // ignore: avoid_bool_literals_in_conditional_expressions
+                              item.images!.length == 1 ? false : true,
                           reverse: false,
                           autoPlay: true,
                           autoPlayInterval: const Duration(seconds: 3),
