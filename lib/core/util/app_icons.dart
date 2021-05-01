@@ -14,4 +14,9 @@ class AppIcons {
   final IconData repository = Icons.book_rounded;
   final IconData team = Icons.people_rounded;
   final IconData logout = MdiIcons.logout;
+  final IconData alert = MdiIcons.alertCircle;
+
+  final IconData youtube = MdiIcons.youtube;
+  final IconData github = MdiIcons.github;
+
 }

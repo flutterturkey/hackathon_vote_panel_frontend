@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:hackathon_panel/core/components/base_card.dart';
 import 'package:hackathon_panel/core/util/app_icons.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -21,11 +22,7 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: const EdgeInsets.all(4),
-        child: Card(
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
+        child: BaseCard(
           child: InkWell(
             borderRadius: BorderRadius.circular(12),
             onTap: onPressedCard,

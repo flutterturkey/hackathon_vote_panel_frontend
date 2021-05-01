@@ -38,33 +38,32 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ],
           ),
-          body: Observer(builder: (_) {
-            return viewModel.loadingProjects
-                ? const LoadingIndicator()
-                : GridView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.all(12),
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: viewModel.projects.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          viewModel.calculateCrossAxisCount(context.width),
-                      childAspectRatio:
-                          viewModel.calculateAspectRatio(context.width),
-                    ),
-                    itemBuilder: (context, index) {
-                      final item = viewModel.projects[index];
-                      return ProjectCard(
-                        projectName: item.name!,
-                        projectTeam: item.teamName!,
-                        isLiked: item.liked!,
-                        onPressedCard: () =>
-                            viewModel.onPressedProjectCard(item),
-                        onPressedLike: () => viewModel.handleClick(item),
-                      );
-                    },
-                  );
-          }),
+          body: Observer(
+              builder: (_) => viewModel.loadingProjects
+                  ? const LoadingIndicator()
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      padding: const EdgeInsets.all(12),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: viewModel.projects.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount:
+                            viewModel.calculateCrossAxisCount(context.width),
+                        childAspectRatio:
+                            viewModel.calculateAspectRatio(context.width),
+                      ),
+                      itemBuilder: (context, index) {
+                        final item = viewModel.projects[index];
+                        return ProjectCard(
+                          projectName: item.name!,
+                          projectTeam: item.teamName!,
+                          isLiked: item.liked!,
+                          onPressedCard: () =>
+                              viewModel.onPressedProjectCard(item),
+                          onPressedLike: () => viewModel.handleClick(item),
+                        );
+                      },
+                    )),
         ),
       );
 }
