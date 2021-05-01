@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:hackathon_panel/api/models/base_response.dart';
 import 'package:hackathon_panel/api/models/login_response.dart';
@@ -8,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class API {
   static final String apiUrl = kDebugMode
-      ? 'administrative-cod-veterinary-madonna.trycloudflare.com'
+      ? 'verification-mint-country-motion.trycloudflare.com'
       : 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
@@ -34,9 +36,7 @@ class API {
     return response.body;
   }
 
-  static Uri handleUrl(String path) {
-    return Uri.https(apiUrl, 'api/$path');
-  }
+  static Uri handleUrl(String path) => Uri.https(apiUrl, 'api/$path');
 
   static Future<LoginResponse> login(String email, String password) async {
     print(handleUrl('login'));
@@ -44,31 +44,33 @@ class API {
       handleUrl('login'),
       headers: headers,
       body: {
-        "email": email,
-        "password": password,
+        'email': email,
+        'password': password,
       },
     );
 
-    return loginResponseFromJson(response.body);
+    final responseJson = json.decode(response.body);
+
+    return LoginResponse().fromJson(responseJson);
   }
 
   static Future<ProjectListResponse> getProjects() async {
     final response = await get('projects');
-    return projectListResponseFromJson(response);
+    return response;
   }
 
   static Future<ProjectDetailResponse> getProjectDetail(int id) async {
     final response = await get('projects/$id');
-    return projectDetailResponseFromJson(response);
+    return response;
   }
 
   static Future<BaseResponse> upvoteProject(int id) async {
     final response = await post('projects/$id');
-    return baseResponseFromJson(response);
+    return response;
   }
 
   static Future<BaseResponse> downvoteProject(int id) async {
     final response = await delete('projects/$id');
-    return baseResponseFromJson(response);
+    return response;
   }
 }

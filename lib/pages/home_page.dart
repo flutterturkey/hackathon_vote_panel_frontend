@@ -4,16 +4,14 @@ import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/widgets/project_card.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<ProjectListResponse> getProjects() async {
-    return API.getProjects();
-  }
+  Future<ProjectListResponse> getProjects() async => API.getProjects();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Projeler'),
+        title: const Text('Projeler'),
       ),
       body: FutureBuilder<ProjectListResponse>(
         builder: (context, snapshot) {

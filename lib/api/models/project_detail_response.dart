@@ -1,17 +1,10 @@
-// To parse this JSON data, do
-//
-//     final projectDetailResponse = projectDetailResponseFromJson(jsonString);
-
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'package:hackathon_panel/api/models/project.dart';
 
-ProjectDetailResponse projectDetailResponseFromJson(String str) =>
-    ProjectDetailResponse.fromJson(json.decode(str));
+part 'project_detail_response.g.dart';
 
-String projectDetailResponseToJson(ProjectDetailResponse data) =>
-    json.encode(data.toJson());
-
+@JsonSerializable()
 class ProjectDetailResponse {
   ProjectDetailResponse({
     this.data,
@@ -21,14 +14,8 @@ class ProjectDetailResponse {
   Project? data;
   String? error;
 
-  factory ProjectDetailResponse.fromJson(Map<String, dynamic> json) =>
-      ProjectDetailResponse(
-        data: Project.fromJson(json["data"]),
-        error: json["error"],
-      );
+  ProjectDetailResponse fromJson(Map<String, dynamic> json) =>
+      _$ProjectDetailResponseFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
-        "error": error,
-      };
+  Map<String, dynamic> toJson() => _$ProjectDetailResponseToJson(this);
 }

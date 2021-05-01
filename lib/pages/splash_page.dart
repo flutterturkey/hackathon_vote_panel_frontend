@@ -5,7 +5,7 @@ import 'package:hackathon_panel/pages/login_page.dart';
 import 'package:hackathon_panel/util/token.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key? key}) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -20,13 +20,13 @@ class _SplashPageState extends State<SplashPage> {
 
   Future<void> checkToken() async {
     final token = await Utils.instance.getToken();
-    Navigator.of(context).pushReplacement(
+    await Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (_) {
           if (token.isEmpty) {
-            return LoginPage();
+            return const LoginPage();
           } else {
-            return HomePage();
+            return const HomePage();
           }
         },
       ),
@@ -34,12 +34,10 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
 }
