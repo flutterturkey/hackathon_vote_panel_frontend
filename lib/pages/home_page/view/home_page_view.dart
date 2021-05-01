@@ -64,7 +64,6 @@ class _HomePageViewState extends State<HomePageView> {
                       );
                     },
                   );
-            ;
           }),
         ),
       );
