@@ -20,3 +20,6 @@ doc/api/
 *.js.deps
 *.js.map
 .fvm/
+
+.flutter-plugins-dependencies
+.flutter-plugins
