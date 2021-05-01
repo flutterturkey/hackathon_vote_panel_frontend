@@ -18,8 +18,8 @@ class ProjectDetailResponse {
     this.error,
   });
 
-  Project data;
-  String error;
+  Project? data;
+  String? error;
 
   factory ProjectDetailResponse.fromJson(Map<String, dynamic> json) =>
       ProjectDetailResponse(
@@ -28,7 +28,7 @@ class ProjectDetailResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
+        "data": data!.toJson(),
         "error": error,
       };
 }

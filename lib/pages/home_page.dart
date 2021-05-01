@@ -4,7 +4,7 @@ import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/widgets/project_card.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -30,13 +30,13 @@ class _HomePageState extends State<HomePage> {
               shrinkWrap: true,
               padding: const EdgeInsets.all(10),
               physics: const BouncingScrollPhysics(),
-              itemCount: snapshot.data.data.length,
+              itemCount: snapshot.data!.data!.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: calculateCrossAxisCount(screenSize.width),
                 childAspectRatio: calculateAscpectRatio(screenSize.width),
               ),
               itemBuilder: (context, index) {
-                final item = snapshot.data.data[index];
+                final item = snapshot.data!.data![index];
                 return ProjectCard(item);
               },
             );

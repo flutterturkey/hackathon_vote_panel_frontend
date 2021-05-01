@@ -5,7 +5,7 @@ import 'package:hackathon_panel/pages/home_page.dart';
 import 'package:hackathon_panel/util/token.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -33,35 +33,35 @@ class _LoginPageState extends State<LoginPage> {
                 controller: _emailController,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator: (email) =>
-                    EmailValidator.validate(email) ? null : "Geçersiz email",
+                    EmailValidator.validate(email!) ? null : "Geçersiz email",
               ),
               //password field
               TextFormField(
                 controller: _passwordController,
                 validator: (val) =>
-                    val.isEmpty ? 'Şifre boş bırakılamaz' : null,
+                    val!.isEmpty ? 'Şifre boş bırakılamaz' : null,
               ),
               SizedBox(
                 height: 20,
               ),
               ElevatedButton(
                 onPressed: () async {
-                  if (_formKey.currentState.validate()) {
+                  if (_formKey.currentState!.validate()) {
                     ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Giriş yapılıyor...')));
                     print(
                         _emailController.text + ' ' + _passwordController.text);
                     final response = await API.login(
                         _emailController.text, _passwordController.text);
-                    if (response.data.message != null) {
-                      ScaffoldMessenger.of(context).clearSnackBars();
+                    if (response.data!.message != null) {
+                      // ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(response.data.message)));
+                          SnackBar(content: Text(response.data!.message!)));
                     } else {
-                      ScaffoldMessenger.of(context).clearSnackBars();
+                      // ScaffoldMessenger.of(context).clearSnackBars();
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Giriş başarılı!')));
-                      await Utils.setToken(response.data.token);
+                      await Utils.instance.setToken(response.data!.token!);
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (_) => HomePage()));
                     }

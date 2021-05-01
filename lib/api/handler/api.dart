@@ -12,7 +12,7 @@ class API {
       : 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
-    'Authorization': 'Bearer ${Constants.token}'
+    'Authorization': 'Bearer ${AppConstants.instance.token}'
   };
 
   static Future<dynamic> get(String path) async {
@@ -21,7 +21,7 @@ class API {
     return response.body;
   }
 
-  static Future<dynamic> post(String path, {Map<String, String> body}) async {
+  static Future<dynamic> post(String path, {Map<String, String>? body}) async {
     final response = await http.post(
       handleUrl(path),
       headers: headers,

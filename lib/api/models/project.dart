@@ -11,14 +11,14 @@ class Project {
     this.images,
   });
 
-  int id;
-  String name;
-  String desc;
-  String teamName;
-  bool liked;
-  String github;
-  String video;
-  int vote;
+  int? id;
+  String? name;
+  String? desc;
+  String? teamName;
+  bool? liked;
+  String? github;
+  String? video;
+  int? vote;
   dynamic images;
 
   factory Project.fromJson(Map<String, dynamic> json) => Project(
