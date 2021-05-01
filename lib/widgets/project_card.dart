@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hackathon_panel/api/models/project.dart';
-import 'package:hackathon_panel/pages/project_detail_page.dart';
+import 'package:hackathon_panel/pages/project_detail_page/view/project_detail_page_view.dart';
 
 class ProjectCard extends StatefulWidget {
   const ProjectCard(this.project, {Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _ProjectCardState extends State<ProjectCard> {
             onTap: () async {
               await Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (_) => ProjectDetailPage(
+                  builder: (_) => ProjectDetailPageView(
                     widget.project.id,
                     widget.project.github,
                     widget.project.name,
