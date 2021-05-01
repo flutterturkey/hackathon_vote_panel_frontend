@@ -18,6 +18,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    getProjects();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
 
@@ -27,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder<ProjectListResponse>(
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.hasData && snapshot.data!.data != null) {
             return GridView.builder(
               shrinkWrap: true,
               padding: const EdgeInsets.all(10),
