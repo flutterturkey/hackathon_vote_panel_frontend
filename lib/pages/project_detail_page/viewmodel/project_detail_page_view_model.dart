@@ -17,7 +17,7 @@ abstract class _ProjectDetailPageViewModelBase with Store, BaseViewModel {
   late YoutubePlayerController youtubePlayerController;
   late final int? projectId;
 
-  late final String videoLink;
+  late String videoLink;
   late final bool isYouTubeVideo;
 
   @override

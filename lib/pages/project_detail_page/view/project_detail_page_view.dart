@@ -89,7 +89,9 @@ class _ProjectDetailPageViewState extends State<ProjectDetailPageView> {
                         ]);
                       };
                   } else if (!item.video!.contains('youtu')) {
-                    viewModel.videoLink = item.video!;
+                    viewModel
+                      ..isYouTubeVideo = false
+                      ..videoLink = item.video!;
                   }
                   return Column(
                     children: [
