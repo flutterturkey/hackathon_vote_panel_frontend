@@ -64,16 +64,39 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
     } else {
       response = await API.upvoteProject(project.id!);
     }
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          response.data!.message!,
-          style: const TextStyle(color: Colors.white),
+
+    if (response.error!) {
+      await showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+                title: const Text(
+                  'Uyarı!',
+                  style: TextStyle(color: Colors.redAccent),
+                ),
+                content: Text(response.data!.message!),
+                actions: [
+                  TextButton(
+                    onPressed: () async => Navigator.of(context).pop(),
+                    child: const Padding(
+                      padding: EdgeInsets.all(10),
+                      child: Text('Tamam'),
+                    ),
+                  ),
+                ],
+              ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            response.data!.message!,
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
         ),
-        backgroundColor: response.error! ? Colors.red : Colors.green,
-      ),
-    );
-    resetProjects();
+      );
+
+      resetProjects();
+    }
   }
 
   Future<void> onPressedLogoutButton() async {
