@@ -5,14 +5,18 @@ import 'package:hackathon_panel/core/util/app_icons.dart';
 class ProjectCard extends StatelessWidget {
   const ProjectCard({
     required this.onPressedCard,
+    required this.onPressedLike,
     required this.projectName,
     required this.projectTeam,
+    required this.isLiked,
     Key? key,
   }) : super(key: key);
 
   final String projectName;
   final String projectTeam;
+  final bool isLiked;
   final VoidCallback onPressedCard;
+  final VoidCallback onPressedLike;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -47,8 +51,11 @@ class ProjectCard extends StatelessWidget {
                     ],
                   ),
                   IconButton(
-                    icon: const Icon(Icons.favorite_outline_rounded),
-                    onPressed: () {},
+                    icon: Icon(
+                      isLiked ? Icons.favorite : Icons.favorite_outline_rounded,
+                      color: isLiked ? Colors.orange[800] : Colors.grey,
+                    ),
+                    onPressed: onPressedLike,
                   ),
                 ],
               ),

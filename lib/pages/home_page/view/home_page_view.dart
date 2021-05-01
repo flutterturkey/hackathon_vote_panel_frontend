@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
-import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view.dart';
 import 'package:hackathon_panel/core/components/base_app_bar_title.dart';
 import 'package:hackathon_panel/core/components/loading_indicator.dart';
@@ -38,35 +38,34 @@ class _HomePageViewState extends State<HomePageView> {
               ),
             ],
           ),
-          body: FutureBuilder<ProjectListResponse>(
-            future: viewModel.getProjects(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GridView.builder(
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(12),
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: snapshot.data!.data!.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount:
-                        viewModel.calculateCrossAxisCount(context.width),
-                    childAspectRatio:
-                        viewModel.calculateAspectRatio(context.width),
-                  ),
-                  itemBuilder: (context, index) {
-                    final item = snapshot.data!.data![index];
-                    return ProjectCard(
-                      projectName: item.name!,
-                      projectTeam: item.teamName!,
-                      onPressedCard: () => viewModel.onPressedProjectCard(item),
-                    );
-                  },
-                );
-              } else {
-                return const LoadingIndicator();
-              }
-            },
-          ),
+          body: Observer(builder: (_) {
+            return viewModel.loadingProjects
+                ? const LoadingIndicator()
+                : GridView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(12),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: viewModel.projects.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount:
+                          viewModel.calculateCrossAxisCount(context.width),
+                      childAspectRatio:
+                          viewModel.calculateAspectRatio(context.width),
+                    ),
+                    itemBuilder: (context, index) {
+                      final item = viewModel.projects[index];
+                      return ProjectCard(
+                        projectName: item.name!,
+                        projectTeam: item.teamName!,
+                        isLiked: item.liked!,
+                        onPressedCard: () =>
+                            viewModel.onPressedProjectCard(item),
+                        onPressedLike: () => viewModel.handleClick(item),
+                      );
+                    },
+                  );
+            ;
+          }),
         ),
       );
 }

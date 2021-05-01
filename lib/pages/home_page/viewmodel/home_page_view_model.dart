@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_panel/api/models/base_response.dart';
 import 'package:hackathon_panel/api/models/project.dart';
 import 'package:hackathon_panel/pages/project_detail_page/view/project_detail_page_view.dart';
 import 'package:mobx/mobx.dart';
@@ -14,44 +15,66 @@ part 'home_page_view_model.g.dart';
 class HomePageViewModel = _HomePageViewModelBase with _$HomePageViewModel;
 
 abstract class _HomePageViewModelBase with Store, BaseViewModel {
+  @observable
+  List<Project> projects = [];
+
+  @observable
+  bool loadingProjects = false;
+
   @override
   void setContext(BuildContext context) {
     this.context = context;
   }
 
   @override
-  void init() {}
+  void init() {
+    loadProjects();
+  }
 
-  Future<ProjectListResponse> getProjects() async {
+  @action
+  Future<void> loadProjects() async {
+    if (loadingProjects) {
+      return;
+    }
+    loadingProjects = true;
     final response = await API.getProjects();
     response.data!.shuffle();
-    return response;
+    response.data!.sort((a, b) {
+      if (b.liked!) {
+        return 1;
+      }
+      return -1;
+    });
+    loadingProjects = false;
+    projects = response.data!;
   }
 
-  double calculateAspectRatio(double width) {
-    var ratio = 0.0;
-    if (width >= 1200) {
-      ratio = (width / 3) / 144;
-    } else if (width >= 1000) {
-      ratio = width / 220;
-    } else {
-      ratio = width / 144;
-    }
-
-    return ratio;
+  @action
+  void resetProjects() {
+    projects = [];
+    loadProjects();
   }
 
-  int calculateCrossAxisCount(double width) {
-    var crossAxisCount = 0;
-    if (width >= 1200) {
-      crossAxisCount = 3;
-    } else if (width >= 1000) {
-      crossAxisCount = 2;
-    } else {
-      crossAxisCount = 1;
-    }
+  @action
+  Future<void> handleClick(Project project) async {
+    late BaseResponse response;
 
-    return crossAxisCount;
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    if (project.liked!) {
+      response = await API.downvoteProject(project.id!);
+    } else {
+      response = await API.upvoteProject(project.id!);
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          response.data!.message!,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: response.error! ? Colors.red : Colors.green,
+      ),
+    );
+    resetProjects();
   }
 
   Future<void> onPressedLogoutButton() async {
@@ -83,5 +106,31 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
         ),
       ),
     );
+  }
+
+  double calculateAspectRatio(double width) {
+    var ratio = 0.0;
+    if (width >= 1200) {
+      ratio = (width / 3) / 144;
+    } else if (width >= 1000) {
+      ratio = width / 220;
+    } else {
+      ratio = width / 144;
+    }
+
+    return ratio;
+  }
+
+  int calculateCrossAxisCount(double width) {
+    var crossAxisCount = 0;
+    if (width >= 1200) {
+      crossAxisCount = 3;
+    } else if (width >= 1000) {
+      crossAxisCount = 2;
+    } else {
+      crossAxisCount = 1;
+    }
+
+    return crossAxisCount;
   }
 }
