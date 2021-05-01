@@ -39,7 +39,7 @@ class API {
   static Future<LoginResponse> login(String email, String password) async {
     final response = await http.post(
       handleUrl('login'),
-      headers: headers,
+      headers: null,
       body: {
         'email': email,
         'password': password,
