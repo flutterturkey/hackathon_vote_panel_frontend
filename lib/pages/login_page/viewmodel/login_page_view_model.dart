@@ -11,9 +11,14 @@ part 'login_page_view_model.g.dart';
 class LoginPageViewModel = _LoginPageViewModelBase with _$LoginPageViewModel;
 
 abstract class _LoginPageViewModelBase with Store, BaseViewModel {
-  late final GlobalKey<FormState> formKey;
+  late final GlobalKey<FormState> loginFormKey;
+  late final GlobalKey<ScaffoldState> scaffoldKey;
+
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
+
+  @observable
+  bool isAutoValidate = false;
 
   @override
   void setContext(BuildContext context) {
@@ -22,42 +27,60 @@ abstract class _LoginPageViewModelBase with Store, BaseViewModel {
 
   @override
   void init() {
-    formKey = GlobalKey<FormState>();
+    loginFormKey = GlobalKey<FormState>();
+    scaffoldKey = GlobalKey();
+
     emailController = TextEditingController();
     passwordController = TextEditingController();
   }
 
+  @action
   Future<void> onPressedLoginButton() async {
-    if (formKey.currentState!.validate()) {
+    if (!checkForm()) {
+      return;
+    }
+    await fetchLogin();
+  }
+
+  @action
+  bool checkForm() {
+    if (!loginFormKey.currentState!.validate()) {
+      isAutoValidate = true;
+      return false;
+    }
+    return true;
+  }
+
+  Future<void> fetchLogin() async {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Giriş yapılıyor...')),
+    );
+
+    logger.d(
+      'email : ${emailController.text}\t'
+      'password :  ${passwordController.text}',
+    );
+
+    final response = await API.login(
+      emailController.text,
+      passwordController.text,
+    );
+
+    if (response.data!.message != null) {
+      // ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Giriş yapılıyor...')),
+        SnackBar(content: Text(response.data!.message!)),
       );
-
-      logger.d(
-        'email : ${emailController.text}\t'
-        'password :  ${passwordController.text}',
+    } else {
+      // ScaffoldMessenger.of(context).clearSnackBars();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Giriş başarılı!')),
       );
-
-      final response = await API.login(
-        emailController.text,
-        passwordController.text,
-      );
-
-      if (response.data!.message != null) {
-        // ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response.data!.message!)),
-        );
-      } else {
-        // ScaffoldMessenger.of(context).clearSnackBars();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Giriş başarılı!')),
-        );
-        await Utils.instance.setToken(response.data!.token!);
-        await Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (_) => const HomePageView()),
-        );
-      }
+      await Utils.instance
+          .setToken(response.data!.token!)
+          .then((_) async => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (_) => const HomePageView()),
+              ));
     }
   }
 }

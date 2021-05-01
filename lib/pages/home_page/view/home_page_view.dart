@@ -4,7 +4,9 @@ import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view.dart';
 import 'package:hackathon_panel/core/components/loading_indicator.dart';
 import 'package:hackathon_panel/core/extension/context_extension.dart';
+import 'package:hackathon_panel/core/util/token.dart';
 import 'package:hackathon_panel/pages/home_page/viewmodel/home_page_view_model.dart';
+import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
 import 'package:hackathon_panel/widgets/project_card.dart';
 
 class HomePageView extends StatefulWidget {
@@ -27,7 +29,23 @@ class _HomePageViewState extends State<HomePageView> {
         },
         model: HomePageViewModel(),
         builder: (context, value) => Scaffold(
-          appBar: AppBar(title: const Text('Projeler')),
+          appBar: AppBar(
+            title: const Text('Projeler'),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  await Utils.instance.setToken('');
+                  await Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (_) => const LoginPageView()),
+                  );
+                },
+                child: const Text(
+                  'Log out',
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
           body: FutureBuilder<ProjectListResponse>(
             future: viewModel.getProjects(),
             builder: (context, snapshot) {

@@ -5,6 +5,5 @@ extension ContextExtension on BuildContext {
   double get width => MediaQuery.of(this).size.width;
   double get height => MediaQuery.of(this).size.height;
 
-  bool get isPortraitMode =>
-      MediaQuery.of(this).orientation == Orientation.portrait;
+  TextTheme get textTheme => Theme.of(this).textTheme;
 }
