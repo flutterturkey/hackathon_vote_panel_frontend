@@ -15,17 +15,17 @@ class LoginResponse {
     this.error,
   });
 
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
+        data: Data.fromJson(json['data']),
+        error: json['error'],
+      );
+
   Data? data;
   bool? error;
 
-  factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        data: Data.fromJson(json["data"]),
-        error: json["error"],
-      );
-
   Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
-        "error": error,
+        'data': data!.toJson(),
+        'error': error,
       };
 }
 
@@ -35,16 +35,16 @@ class Data {
     this.token,
   });
 
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        message: json['message'],
+        token: json['token'],
+      );
+
   String? message;
   String? token;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        message: json["message"] ?? null,
-        token: json["token"] ?? null,
-      );
-
   Map<String, dynamic> toJson() => {
-        "message": message,
-        "token": token,
+        'message': message,
+        'token': token,
       };
 }

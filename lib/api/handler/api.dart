@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 
 class API {
   static final String apiUrl = kDebugMode
-      ? 'administrative-cod-veterinary-madonna.trycloudflare.com'
+      ? 'verification-mint-country-motion.trycloudflare.com'
       : 'hp-api.ademozcan.com.tr';
 
   static Map<String, String> headers = {
@@ -34,9 +34,7 @@ class API {
     return response.body;
   }
 
-  static Uri handleUrl(String path) {
-    return Uri.https(apiUrl, 'api/$path');
-  }
+  static Uri handleUrl(String path) => Uri.https(apiUrl, 'api/$path');
 
   static Future<LoginResponse> login(String email, String password) async {
     print(handleUrl('login'));
@@ -44,8 +42,8 @@ class API {
       handleUrl('login'),
       headers: headers,
       body: {
-        "email": email,
-        "password": password,
+        'email': email,
+        'password': password,
       },
     );
 

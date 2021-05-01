@@ -15,17 +15,17 @@ class BaseResponse {
     this.error,
   });
 
+  factory BaseResponse.fromJson(Map<String, dynamic> json) => BaseResponse(
+        data: Data.fromJson(json['data']),
+        error: json['error'],
+      );
+
   Data? data;
   bool? error;
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) => BaseResponse(
-        data: Data.fromJson(json["data"]),
-        error: json["error"],
-      );
-
   Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
-        "error": error,
+        'data': data!.toJson(),
+        'error': error,
       };
 }
 
@@ -34,13 +34,13 @@ class Data {
     this.message,
   });
 
-  String? message;
-
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        message: json["message"],
+        message: json['message'],
       );
 
+  String? message;
+
   Map<String, dynamic> toJson() => {
-        "message": message,
+        'message': message,
       };
 }
