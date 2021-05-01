@@ -15,8 +15,8 @@ class LoginResponse {
     this.error,
   });
 
-  Data data;
-  bool error;
+  Data? data;
+  bool? error;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
         data: Data.fromJson(json["data"]),
@@ -24,7 +24,7 @@ class LoginResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
+        "data": data!.toJson(),
         "error": error,
       };
 }
@@ -35,8 +35,8 @@ class Data {
     this.token,
   });
 
-  String message;
-  String token;
+  String? message;
+  String? token;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         message: json["message"] ?? null,

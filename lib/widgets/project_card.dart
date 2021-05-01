@@ -4,7 +4,7 @@ import 'package:hackathon_panel/api/models/project.dart';
 import 'package:hackathon_panel/pages/project_detail_page.dart';
 
 class ProjectCard extends StatefulWidget {
-  ProjectCard(this.project, {Key key}) : super(key: key);
+  ProjectCard(this.project, {Key? key}) : super(key: key);
 
   final Project project;
 

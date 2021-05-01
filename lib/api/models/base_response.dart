@@ -15,8 +15,8 @@ class BaseResponse {
     this.error,
   });
 
-  Data data;
-  bool error;
+  Data? data;
+  bool? error;
 
   factory BaseResponse.fromJson(Map<String, dynamic> json) => BaseResponse(
         data: Data.fromJson(json["data"]),
@@ -24,7 +24,7 @@ class BaseResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": data.toJson(),
+        "data": data!.toJson(),
         "error": error,
       };
 }
@@ -34,7 +34,7 @@ class Data {
     this.message,
   });
 
-  String message;
+  String? message;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         message: json["message"],

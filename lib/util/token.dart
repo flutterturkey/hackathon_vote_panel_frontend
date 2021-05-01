@@ -2,7 +2,7 @@ import 'package:hackathon_panel/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Utils {
-  static Utils _instance;
+  static Utils? _instance;
   static Utils get instance => _instance ??= Utils();
 
   Future<void> setToken(String token) async {

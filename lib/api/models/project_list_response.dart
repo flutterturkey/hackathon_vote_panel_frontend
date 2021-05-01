@@ -18,8 +18,8 @@ class ProjectListResponse {
     this.error,
   });
 
-  List<Project> data;
-  String error;
+  List<Project>? data;
+  String? error;
 
   factory ProjectListResponse.fromJson(Map<String, dynamic> json) =>
       ProjectListResponse(
@@ -28,7 +28,7 @@ class ProjectListResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
         "error": error,
       };
 }

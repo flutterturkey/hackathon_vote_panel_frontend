@@ -5,7 +5,7 @@ import 'package:hackathon_panel/pages/login_page.dart';
 import 'package:hackathon_panel/util/token.dart';
 
 class SplashPage extends StatefulWidget {
-  SplashPage({Key key}) : super(key: key);
+  SplashPage({Key? key}) : super(key: key);
 
   @override
   _SplashPageState createState() => _SplashPageState();
@@ -23,7 +23,7 @@ class _SplashPageState extends State<SplashPage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(
         builder: (_) {
-          if (token.isEmpty || token != null) {
+          if (token.isEmpty) {
             return LoginPage();
           } else {
             return HomePage();

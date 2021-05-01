@@ -21,7 +21,7 @@ class API {
     return response.body;
   }
 
-  static Future<dynamic> post(String path, {Map<String, String> body}) async {
+  static Future<dynamic> post(String path, {Map<String, String>? body}) async {
     final response = await http.post(
       handleUrl(path),
       headers: headers,
