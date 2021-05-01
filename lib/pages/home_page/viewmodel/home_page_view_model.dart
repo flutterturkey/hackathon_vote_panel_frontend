@@ -54,7 +54,7 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
 
   Future<void> logout() async {
     final response = await API.logout();
-    print(response);
+    logger.d(response);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:hackathon_panel/api/models/project.dart';
 import 'package:hackathon_panel/pages/project_detail_page.dart';
-import 'package:shimmer/shimmer.dart';
 
 class ProjectCard extends StatefulWidget {
   const ProjectCard(this.project, {Key? key}) : super(key: key);
@@ -39,18 +38,13 @@ class _ProjectCardState extends State<ProjectCard> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Shimmer.fromColors(
-                  baseColor: Colors.blueAccent,
-                  highlightColor: Colors.white,
-                  period: const Duration(seconds: 2),
-                  child: Text(
-                    widget.project.name!,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
+                Text(
+                  widget.project.name!,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headline5!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
                 Text(
