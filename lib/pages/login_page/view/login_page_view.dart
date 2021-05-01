@@ -37,24 +37,27 @@ class _LoginPageViewState extends State<LoginPageView> {
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(36),
               child: Center(
-                child: Column(
-                  children: [
-                    Text(
-                      'Flutter Festivali Hackathon Paneline Hoş Geldiniz',
-                      style: context.textTheme.headline4,
-                      textAlign: TextAlign.center,
-                    ),
-                    const AppLogo(height: 250),
-                    const SizedBox(height: 50),
-                    EmailInputField(controller: viewModel.emailController),
-                    PasswordInputField(
-                        controller: viewModel.passwordController),
-                    const SizedBox(height: 30),
-                    BaseButton(
-                      label: 'Giriş Yap',
-                      onPressed: () async => viewModel.onPressedLoginButton(),
-                    ),
-                  ],
+                child: AutofillGroup(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Flutter Festivali Hackathon Paneline Hoş Geldiniz',
+                        style: context.textTheme.headline4,
+                        textAlign: TextAlign.center,
+                      ),
+                      const AppLogo(height: 250),
+                      const SizedBox(height: 50),
+                      EmailInputField(controller: viewModel.emailController),
+                      PasswordInputField(
+                        controller: viewModel.passwordController,
+                      ),
+                      const SizedBox(height: 30),
+                      BaseButton(
+                        label: 'Giriş Yap',
+                        onPressed: () async => viewModel.onPressedLoginButton(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -13,6 +13,7 @@ class AppTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onEditingComplete,
+    this.autofillHints,
     Key? key,
   }) : super(key: key);
 
@@ -27,6 +28,7 @@ class AppTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final VoidCallback? onEditingComplete;
+  final String? autofillHints;
 
   @override
   Widget build(BuildContext context) => TextFormField(
@@ -36,6 +38,7 @@ class AppTextField extends StatelessWidget {
         controller: controller,
         validator: validator,
         maxLines: 1,
+        autofillHints: [autofillHints!],
         textInputAction: textInputAction ?? TextInputAction.next,
         onFieldSubmitted: onFieldSubmitted,
         onEditingComplete: () => onEditingComplete,

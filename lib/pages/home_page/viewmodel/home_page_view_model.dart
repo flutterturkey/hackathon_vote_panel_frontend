@@ -24,7 +24,7 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
     return response;
   }
 
-  double calculateAscpectRatio(double width) {
+  double calculateAspectRatio(double width) {
     var ratio = 0.0;
     if (width >= 1200) {
       ratio = (width / 3) / 144;

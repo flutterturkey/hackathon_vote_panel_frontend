@@ -21,6 +21,7 @@ class EmailInputField extends StatelessWidget {
           autoFocus: true,
           secure: false,
           textInputAction: TextInputAction.next,
+          autofillHints: AutofillHints.email,
           onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
           onEditingComplete: () => FocusScope.of(context).nextFocus(),
           prefixIcon: Icon(AppIcons.instance.mail),

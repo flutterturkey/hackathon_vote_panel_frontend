@@ -65,22 +65,21 @@ abstract class _LoginPageViewModelBase with Store, BaseViewModel {
       emailController.text,
       passwordController.text,
     );
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
 
     if (response.data!.message != null) {
-      // ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(response.data!.message!)),
       );
     } else {
-      // ScaffoldMessenger.of(context).clearSnackBars();
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Giriş başarılı!')),
       );
-      await Utils.instance
-          .setToken(response.data!.token!)
-          .then((_) async => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const HomePageView()),
-              ));
+      await Utils.instance.setToken(response.data!.token!).then(
+            (_) async => Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (_) => const HomePageView()),
+            ),
+          );
     }
   }
 }

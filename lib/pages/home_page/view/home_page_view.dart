@@ -40,7 +40,7 @@ class _HomePageViewState extends State<HomePageView> {
                   );
                 },
                 child: const Text(
-                  'Log out',
+                  'Çıkış Yap',
                   style: TextStyle(color: Colors.white),
                 ),
               )
@@ -57,9 +57,9 @@ class _HomePageViewState extends State<HomePageView> {
                   itemCount: snapshot.data!.data!.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount:
-                        viewModel.calculateCrossAxisCount(context.height),
+                        viewModel.calculateCrossAxisCount(context.width),
                     childAspectRatio:
-                        viewModel.calculateAscpectRatio(context.width),
+                        viewModel.calculateAspectRatio(context.width),
                   ),
                   itemBuilder: (context, index) {
                     final item = snapshot.data!.data![index];

@@ -27,6 +27,7 @@ class _PasswordInputFieldState extends State<PasswordInputField> {
           secure: isSecure,
           prefixIcon: Icon(AppIcons.instance.password),
           suffixIcon: buildShowHidePasswordButton,
+          autofillHints: AutofillHints.password,
           textInputAction: TextInputAction.done,
           textInputType: TextInputType.visiblePassword,
           validator: (val) => val!.isEmpty ? 'Şifre boş bırakılamaz' : null,
