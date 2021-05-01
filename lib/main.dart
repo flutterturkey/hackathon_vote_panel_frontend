@@ -14,6 +14,7 @@ class HackathonPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
         title: 'Hackathon Oylama Paneli',
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,

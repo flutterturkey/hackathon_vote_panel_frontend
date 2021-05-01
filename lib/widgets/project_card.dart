@@ -28,6 +28,7 @@ class _ProjectCardState extends State<ProjectCard> {
                 MaterialPageRoute(
                   builder: (_) => ProjectDetailPage(
                     widget.project.id,
+                    widget.project.github,
                     widget.project.name,
                   ),
                 ),
