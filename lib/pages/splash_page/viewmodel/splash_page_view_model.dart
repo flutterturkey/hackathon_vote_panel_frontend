@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mobx/mobx.dart';
 
+import 'package:hackathon_panel/core/base/base_view_model.dart';
+import 'package:hackathon_panel/core/util/token.dart';
 import 'package:hackathon_panel/pages/home_page/view/home_page_view.dart';
 import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
-import 'package:hackathon_panel/core/util/token.dart';
 
-class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+part 'splash_page_view_model.g.dart';
+
+class SplashPageViewModel = _SplashPageViewModelBase with _$SplashPageViewModel;
+
+abstract class _SplashPageViewModelBase with Store, BaseViewModel {
+  @override
+  void setContext(BuildContext context) {
+    this.context = context;
+  }
 
   @override
-  _SplashPageState createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
-  @override
-  void initState() {
-    super.initState();
-    checkToken();
+  Future<void> init() async {
+    await checkToken();
   }
 
   Future<void> checkToken() async {
@@ -32,12 +35,4 @@ class _SplashPageState extends State<SplashPage> {
       ),
     );
   }
-
-  @override
-  Widget build(BuildContext context) => const Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
 }
