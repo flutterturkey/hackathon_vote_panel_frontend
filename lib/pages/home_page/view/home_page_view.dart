@@ -4,10 +4,9 @@ import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view.dart';
 import 'package:hackathon_panel/core/components/loading_indicator.dart';
 import 'package:hackathon_panel/core/extension/context_extension.dart';
-import 'package:hackathon_panel/core/util/token.dart';
 import 'package:hackathon_panel/pages/home_page/viewmodel/home_page_view_model.dart';
-import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
 import 'package:hackathon_panel/widgets/project_card.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({Key? key}) : super(key: key);
@@ -30,18 +29,34 @@ class _HomePageViewState extends State<HomePageView> {
         model: HomePageViewModel(),
         builder: (context, value) => Scaffold(
           appBar: AppBar(
-            title: const Text('Projeler'),
+            backgroundColor: const Color(0xff424242),
+            title: Text(
+              "Hackathon'a Katılan Projeler",
+              style: context.textTheme.headline4!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.orange[800],
+              ),
+              textAlign: TextAlign.center,
+            ),
             actions: [
-              TextButton(
-                onPressed: () async {
-                  await Utils.instance.setToken('');
-                  await Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (_) => const LoginPageView()),
-                  );
-                },
-                child: const Text(
-                  'Çıkış Yap',
-                  style: TextStyle(color: Colors.white),
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: TextButton(
+                  onPressed: () async {
+                    await viewModel.logout();
+                  },
+                  child: Row(
+                    children: [
+                      Icon(MdiIcons.logout, color: Colors.orange[800]),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      const Text(
+                        'Çıkış Yap',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

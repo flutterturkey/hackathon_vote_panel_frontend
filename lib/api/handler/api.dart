@@ -49,6 +49,15 @@ class API {
     return LoginResponse().fromJson(json.decode(response.body));
   }
 
+  static Future<BaseResponse> logout() async {
+    final response = await http.get(
+      handleUrl('logout'),
+      headers: headers,
+    );
+
+    return BaseResponse().fromJson(json.decode(response.body));
+  }
+
   static Future<ProjectListResponse> getProjects() async {
     final response = await get('projects');
     return ProjectListResponse().fromJson(json.decode(response));

@@ -53,12 +53,13 @@ abstract class _LoginPageViewModelBase with Store, BaseViewModel {
 
   Future<void> fetchLogin() async {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Giriş yapılıyor...')),
-    );
-
-    logger.d(
-      'email : ${emailController.text}\t'
-      'password :  ${passwordController.text}',
+      const SnackBar(
+        content: Text(
+          'Giriş yapılıyor...',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0xff424242),
+      ),
     );
 
     final response = await API.login(
@@ -69,12 +70,25 @@ abstract class _LoginPageViewModelBase with Store, BaseViewModel {
 
     if (response.data!.message != null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(response.data!.message!)),
+        SnackBar(
+          content: Text(
+            response.data!.message!,
+            style: const TextStyle(color: Colors.red),
+          ),
+          backgroundColor: const Color(0xff424242),
+        ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Giriş başarılı!')),
+        const SnackBar(
+          content: Text(
+            'Giriş başarılı!',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+        ),
       );
+
       await Utils.instance.setToken(response.data!.token!).then(
             (_) async => Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (_) => const HomePageView()),

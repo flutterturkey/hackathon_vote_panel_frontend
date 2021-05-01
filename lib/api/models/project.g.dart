@@ -15,7 +15,6 @@ Project _$ProjectFromJson(Map<String, dynamic> json) {
     liked: json['liked'] as bool?,
     github: json['github'] as String?,
     video: json['video'] as String?,
-    vote: json['vote'] as int?,
     images:
         (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
@@ -29,6 +28,5 @@ Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
       'liked': instance.liked,
       'github': instance.github,
       'video': instance.video,
-      'vote': instance.vote,
       'images': instance.images,
     };

@@ -83,10 +83,23 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                 return Expanded(
                   child: Column(
                     children: [
-                      Text(item.teamName!),
-                      Text(item.desc!),
                       const SizedBox(
-                        height: 30,
+                        height: 32,
+                      ),
+                      Text(
+                        item.desc!,
+                        style: Theme.of(context).textTheme.subtitle1,
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        'Takım: ${item.teamName!}',
+                        style: Theme.of(context).textTheme.bodyText2,
+                      ),
+                      const SizedBox(
+                        height: 32,
                       ),
                       CarouselSlider.builder(
                         itemCount: item.images!.length,
@@ -116,7 +129,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                         ),
                       ),
                       const SizedBox(
-                        height: 30,
+                        height: 32,
                       ),
                       if (item.video!.contains('youtu'))
                         SizedBox(
@@ -150,7 +163,7 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
                           ),
                         ),
                       const SizedBox(
-                        height: 30,
+                        height: 32,
                       ),
                     ],
                   ),

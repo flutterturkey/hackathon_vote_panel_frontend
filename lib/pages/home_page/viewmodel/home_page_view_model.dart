@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_panel/core/util/token.dart';
+import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:hackathon_panel/api/handler/api.dart';
@@ -20,7 +22,7 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
 
   Future<ProjectListResponse> getProjects() async {
     final response = await API.getProjects();
-    response.data!.sort((a, b) => a.vote!.compareTo(b.vote!));
+    response.data!.shuffle();
     return response;
   }
 
@@ -48,5 +50,24 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
     }
 
     return crossAxisCount;
+  }
+
+  Future<void> logout() async {
+    final response = await API.logout();
+    print(response);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          response.data!.message!,
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    await Utils.instance.setToken('');
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => const LoginPageView()),
+    );
   }
 }

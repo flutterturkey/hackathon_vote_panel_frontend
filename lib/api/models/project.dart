@@ -12,7 +12,6 @@ class Project {
     this.liked,
     this.github,
     this.video,
-    this.vote,
     this.images,
   });
 
@@ -26,7 +25,6 @@ class Project {
   bool? liked;
   String? github;
   String? video;
-  int? vote;
   List<String>? images;
 
   Project fromJson(Map<String, dynamic> json) => _$ProjectFromJson(json);
