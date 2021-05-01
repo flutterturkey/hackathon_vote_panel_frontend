@@ -5,7 +5,6 @@ import 'package:hackathon_panel/pages/project_detail_page/view/project_detail_pa
 import 'package:mobx/mobx.dart';
 
 import 'package:hackathon_panel/api/handler/api.dart';
-import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view_model.dart';
 import 'package:hackathon_panel/core/util/token.dart';
 import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
