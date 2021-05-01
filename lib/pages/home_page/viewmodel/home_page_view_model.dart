@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hackathon_panel/core/util/token.dart';
-import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
+import 'package:hackathon_panel/api/models/project.dart';
+import 'package:hackathon_panel/pages/project_detail_page/view/project_detail_page_view.dart';
 import 'package:mobx/mobx.dart';
 
 import 'package:hackathon_panel/api/handler/api.dart';
 import 'package:hackathon_panel/api/models/project_list_response.dart';
 import 'package:hackathon_panel/core/base/base_view_model.dart';
+import 'package:hackathon_panel/core/util/token.dart';
+import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
 
 part 'home_page_view_model.g.dart';
 
@@ -52,7 +54,7 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
     return crossAxisCount;
   }
 
-  Future<void> logout() async {
+  Future<void> onPressedLogoutButton() async {
     final response = await API.logout();
     logger.d(response);
     ScaffoldMessenger.of(context).showSnackBar(
@@ -68,6 +70,18 @@ abstract class _HomePageViewModelBase with Store, BaseViewModel {
     await Utils.instance.setToken('');
     await Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (_) => const LoginPageView()),
+    );
+  }
+
+  Future<void> onPressedProjectCard(Project project) async {
+    await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => ProjectDetailPageView(
+          project.id,
+          project.github,
+          project.name,
+        ),
+      ),
     );
   }
 }
