@@ -12,9 +12,9 @@ class AppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) => Text(
         title,
         textAlign: TextAlign.center,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
-          color: Colors.orange[800],
+          color: Colors.white,
         ),
       );
 }

@@ -30,7 +30,6 @@ class _HomePageViewState extends State<HomePageView> {
         model: HomePageViewModel(),
         builder: (context, value) => Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color(0xff424242),
             centerTitle: true,
             title: const AppBarTitle("Hackathon'a Katılan Projeler"),
             actions: [

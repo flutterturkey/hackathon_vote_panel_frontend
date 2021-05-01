@@ -42,6 +42,7 @@ class _ProjectDetailPageViewState extends State<ProjectDetailPageView> {
         model: ProjectDetailPageViewModel(),
         builder: (context, value) => Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             title: Text(widget.projectName!),
             actions: [
               IconButton(

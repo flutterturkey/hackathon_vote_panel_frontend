@@ -18,7 +18,7 @@ class LogOutActionButton extends StatelessWidget {
           child: Row(
             children: [
               const SizedBox(width: 10),
-              Icon(AppIcons.instance.logout, color: Colors.orange[800]),
+              Icon(AppIcons.instance.logout, color: Colors.white),
               const SizedBox(width: 10),
               const Text(
                 'Çıkış Yap',
