@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:hackathon_panel/pages/home_page.dart';
+import 'package:hackathon_panel/pages/home_page/view/home_page_view.dart';
 import 'package:hackathon_panel/pages/login_page.dart';
-import 'package:hackathon_panel/util/token.dart';
+import 'package:hackathon_panel/core/util/token.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);

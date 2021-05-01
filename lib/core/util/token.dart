@@ -1,5 +1,6 @@
-import 'package:hackathon_panel/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:hackathon_panel/core/util/constants.dart';
 
 class Utils {
   static Utils? _instance;

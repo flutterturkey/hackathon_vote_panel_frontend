@@ -1,8 +1,9 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hackathon_panel/api/handler/api.dart';
-import 'package:hackathon_panel/pages/home_page.dart';
-import 'package:hackathon_panel/util/token.dart';
+import 'package:hackathon_panel/core/util/token.dart';
+import 'package:hackathon_panel/pages/home_page/view/home_page_view.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
