@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hackathon_panel/pages/home_page/view/home_page_view.dart';
-import 'package:hackathon_panel/pages/login_page.dart';
+import 'package:hackathon_panel/pages/login_page/view/login_page_view.dart';
 import 'package:hackathon_panel/core/util/token.dart';
 
 class SplashPage extends StatefulWidget {
@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
       MaterialPageRoute(
         builder: (_) {
           if (token.isEmpty) {
-            return const LoginPage();
+            return const LoginPageView();
           } else {
             return const HomePageView();
           }
